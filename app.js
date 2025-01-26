@@ -145,13 +145,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Swap token logos and text
         if (isFrollToBnb) {
-            fromTokenLogo.src = "https://raw.githubusercontent.com/frollswap/lottery/main/froll24.png";
-            toTokenLogo.src = "https://raw.githubusercontent.com/frollswap/lottery/main/bnb24.png";
+            fromTokenLogo.src = "https://github.com/frollswap/lottery/blob/main/froll24.png?raw=true";
+            toTokenLogo.src = "https://github.com/frollswap/lottery/blob/main/bnb24.png?raw=true";
             fromTokenInfo.textContent = `FROLL: 0.0000`;
             toTokenInfo.textContent = `BNB: 0.0000`;
         } else {
-            fromTokenLogo.src = "https://raw.githubusercontent.com/frollswap/lottery/main/bnb24.png";
-            toTokenLogo.src = "https://raw.githubusercontent.com/frollswap/lottery/main/froll24.png";
+            fromTokenLogo.src = "https://github.com/frollswap/lottery/blob/main/bnb24.png?raw=true";
+            toTokenLogo.src = "https://github.com/frollswap/lottery/blob/main/froll24.png?raw=true";
             fromTokenInfo.textContent = `BNB: 0.0000`;
             toTokenInfo.textContent = `FROLL: 0.0000`;
         }
