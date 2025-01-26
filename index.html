@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lottery.vin - FROLL/BNB</title>
+    <link rel="stylesheet" href="style.css">
+     <!-- Favicon -->
+    <link rel="icon" href="lottery48.png" type="image/png">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="navbar">
+        <img src="https://github.com/frollswap/lottery/blob/main/web48.png?raw=true" alt="FrollSwap Logo" class="logo">
+        <div class="nav-links">
+            <a href="https://LotteryFroll.com" target="_blank">LotteryFroll.com</a>
+            <a href="https://t.me/FortuneRolls" target="_blank">Join Telegram</a>
+            <a href="https://x.com/FortuneRolls" target="_blank">Follow X</a>
+        </div>
+    </header>
+
+    <!-- Introduction Section -->
+    <section class="introduction interface">
+        <h1>Welcome to Lottery.vin</h1>
+        <p>FROLL, developed on the BNB blockchain, is an innovative token with a total supply of 1 million, offering unique utilities and opportunities in decentralized lottery systems. Join the future of transparent, automated lottery experiences.</p>
+        <button class="button trade-button">Trade FROLL/BNB</button>
+    </section>
+
+    <section class="about-froll interface">
+    <h2>About FROLL</h2>
+    <p>FROLL is currently used on the VIC blockchain at <a href="https://LotteryFroll.com" target="_blank">LotteryFroll.com</a> for ticket payments and prizes in major global lotteries like Mega Millions, Powerball, and EuroMillions. On the BNB blockchain, FROLL powers an entirely new experience with automated lottery results. Both systems operate transparently and are governed by smart contracts, tailored to suit different user preferences.</p>
+    <a href="https://docs.google.com/document/d/1Mk7sI7lPwNzP8E9ksHif_4z4jwzCz5b6/edit?usp=sharing&ouid=100963559652495354132&rtpof=true&sd=true" target="_blank" class="button contract-link">Read the Full Whitepaper</a>
+</section>
+
+    <!-- Distribution Section -->
+<section class="distribution interface">
+    <h2>FROLL Distribution</h2>
+    <p>The entire supply of 1 million FROLL will be locked in a smart contract and sold to the community at a fixed rate of 1 FROLL = 0.039 BNB. If the total supply is not sold, the automated lottery system on Lottery.vin will not be launched, and all BNB will remain secure in the smart contract wallet, ensuring liquidity for FROLL buybacks at the fixed rate.</p>
+    <a href="https://bscscan.com/token/0x7783cBC17d43F936DA1C1D052E4a33a9FfF774c1" target="_blank" class="button contract-link">View Smart Contract on BscScan</a>
+</section>
+
+
+    <!-- Benefits Section -->
+    <section class="benefits interface">
+        <h2>Benefits of Holding FROLL</h2>
+        <p>FROLL holders enjoy exclusive benefits, including:</p>
+        <ul>
+            <li><strong>Profit Sharing:</strong> 10% of lottery ticket sales revenue will be distributed to FROLL holders on the 21st of each month based on wallet balances recorded at 0:00:00 UTC.</li>
+            <li><strong>Fair Value:</strong> BNB in the smart contract wallet ensures buyback liquidity at the fixed rate.</li>
+        </ul>
+    </section>
+
+    <!-- Swap Interface -->
+    <div id="swap-interface" class="interface" style="display: none;">
+        <header class="swap-header">
+            <div id="wallet-address" class="wallet-address"></div>
+            <button id="disconnect-wallet" class="button">Disconnect Wallet</button>
+        </header>
+        <h1>Swap FROLL/BNB</h1>
+        <div class="swap-container">
+            <!-- From Token -->
+            <div class="token-input">
+                <img id="from-token-logo" src="https://github.com/frollswap/lottery/blob/main/froll24.png?raw=true" alt="From Token">
+                <div>
+                    <p id="from-token-info">FROLL: 0.0000</p>
+                    <input type="number" id="from-amount" placeholder="0.0">
+                </div>
+                <button id="max-button" class="button">Max</button>
+            </div>
+
+            <!-- Swap Direction -->
+            <button id="swap-direction" class="swap-direction">↔️</button>
+
+            <!-- To Token -->
+            <div class="token-input">
+                <img id="to-token-logo" src="https://github.com/frollswap/lottery/blob/main/bnb.png?raw=true" alt="To Token">
+                <div>
+                    <p id="to-token-info">BNB: 0.0000</p>
+                    <input type="text" id="to-amount" placeholder="0.0" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!-- Swap Details -->
+        <div class="swap-details">
+            <p id="transaction-fee">Transaction Fee: Calculated dynamically</p>
+            <p id="gas-fee">Estimated Gas Fee: ~Dynamic</p>
+        </div>
+
+        <!-- Swap Button -->
+        <button id="swap-now" class="button">Swap Now</button>
+    </div>
+
+    <!-- Include Ethers.js -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <!-- Include App.js -->
+    <script src="app.js"></script>
+</body>
+</html>
