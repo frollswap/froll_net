@@ -14,7 +14,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 15px 20px;
-    background-color: #28a745; /* Màu xanh lá cây đặc trưng */
+    background-color: #28a745;
     color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -42,6 +42,25 @@ body {
     font-weight: bold;
     text-align: right;
 }
+
+/* Contract Address */
+.contract-address {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.contract-address .copy-text {
+    font-weight: bold;
+    color: #28a745;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.contract-address .copy-text:hover {
+    color: #218838;
+}
+
 /* Interface Containers */
 .interface {
     max-width: 500px;
@@ -60,7 +79,7 @@ body {
 }
 
 h1 {
-    color: #1e7e34; /* Màu xanh lá cây đậm */
+    color: #1e7e34;
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -105,6 +124,7 @@ p {
     cursor: not-allowed;
     box-shadow: none;
 }
+
 /* Swap Container */
 .swap-container {
     display: flex;
@@ -112,7 +132,7 @@ p {
     align-items: center;
     margin: 20px 0;
     gap: 20px;
-    flex-wrap: wrap; /* Để giao diện đẹp trên màn hình nhỏ */
+    flex-wrap: wrap;
 }
 
 .token-input {
@@ -174,11 +194,12 @@ p {
     transform: rotate(180deg);
     color: #218838;
 }
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .swap-container {
         flex-direction: column;
-        gap: 15px; /* Tăng khoảng cách giữa các thành phần trên màn hình nhỏ */
+        gap: 15px;
     }
 
     .token-input {
@@ -186,6 +207,6 @@ p {
     }
 
     .button {
-        width: 100%; /* Nút bấm rộng toàn bộ trên màn hình nhỏ */
+        width: 100%;
     }
 }
