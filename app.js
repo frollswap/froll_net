@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const maxButton = document.getElementById('max-button');
     const swapNowButton = document.getElementById('swap-now');
     const gasFeeDisplay = document.getElementById('gas-fee');
+    const frollToUsdDisplay = document.getElementById('froll-to-usd');
 
     // Blockchain Config
     let provider, signer;
@@ -61,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let balances = { FROLL: 0, BNB: 0 };
     let fromToken = 'FROLL';
     let toToken = 'BNB';
-
     // Ensure Wallet Connected
     async function ensureWalletConnected() {
         try {
@@ -81,6 +81,33 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error("Failed to connect wallet:", error);
             alert('Failed to connect wallet. Please try again.');
             return false;
+        }
+    }
+
+    // Fetch BNB/USD price from BSC API
+    async function fetchBnbToUsdPrice() {
+        try {
+            const response = await fetch(
+                `https://api.bscscan.com/api?module=stats&action=bnbprice&apikey=BIEGUCY7A9NPF2M2KPYZRMRFABVCVJ9D3V`
+            );
+            const data = await response.json();
+            return parseFloat(data.result.ethusd); // Giá BNB/USD từ API
+        } catch (error) {
+            console.error("Failed to fetch BNB price:", error);
+            return null;
+        }
+    }
+
+    // Calculate FROLL/USD price
+    async function calculateFrollPrice() {
+        try {
+            const bnbToUsd = await fetchBnbToUsdPrice();
+            if (!bnbToUsd) return;
+
+            const frollToUsd = (RATE * bnbToUsd).toFixed(2); // Tính giá FROLL/USD
+            frollToUsdDisplay.textContent = frollToUsd; // Cập nhật giá trên giao diện
+        } catch (error) {
+            console.error("Failed to calculate FROLL price:", error);
         }
     }
 
@@ -106,6 +133,79 @@ document.addEventListener('DOMContentLoaded', () => {
         fromTokenInfo.textContent = `${fromToken}: ${balances[fromToken].toFixed(4)}`;
         toTokenInfo.textContent = `${toToken}: ${balances[toToken].toFixed(4)}`;
     }
+    // Max Button
+    maxButton.addEventListener('click', async () => {
+        const connected = await ensureWalletConnected();
+        if (!connected) return;
+
+        fromAmountInput.value = balances[fromToken];
+        calculateToAmount();
+    });
+
+    // Calculate To Amount
+    fromAmountInput.addEventListener('input', calculateToAmount);
+    function calculateToAmount() {
+        const fromAmount = parseFloat(fromAmountInput.value);
+        if (isNaN(fromAmount) || fromAmount <= 0) {
+            toAmountInput.value = '';
+            return;
+        }
+
+        let toAmount;
+        if (fromToken === 'FROLL') {
+            toAmount = (fromAmount * RATE).toFixed(4);
+        } else {
+            toAmount = (fromAmount / RATE).toFixed(4);
+        }
+
+        toAmountInput.value = toAmount;
+        gasFeeDisplay.textContent = `Estimated Gas Fee: ~0.0005 BNB`;
+    }
+
+    // Swap Direction
+    swapDirectionButton.addEventListener('click', () => {
+        [fromToken, toToken] = [toToken, fromToken];
+        [fromTokenLogo.src, toTokenLogo.src] = [toTokenLogo.src, fromTokenLogo.src];
+        updateTokenDisplay();
+        clearInputs();
+    });
+
+    // Clear Inputs
+    function clearInputs() {
+        fromAmountInput.value = '';
+        toAmountInput.value = '';
+    }
+    // Swap Tokens
+    swapNowButton.addEventListener('click', async () => {
+        try {
+            const fromAmount = parseFloat(fromAmountInput.value);
+
+            if (isNaN(fromAmount) || fromAmount <= 0) {
+                alert('Please enter a valid amount to swap.');
+                return;
+            }
+
+            if (fromToken === 'FROLL') {
+                const fromAmountInWei = ethers.utils.parseUnits(fromAmount.toString(), 18);
+
+                const approveTx = await frollTokenContract.approve(frollSwapAddress, fromAmountInWei);
+                await approveTx.wait();
+
+                const tx = await frollSwapContract.swapFROLLForBNB(fromAmountInWei);
+                await tx.wait();
+                alert('Swap FROLL to BNB successful.');
+            } else {
+                const tx = await frollSwapContract.swapBNBForFROLL({ value: ethers.utils.parseEther(fromAmount.toString()) });
+                await tx.wait();
+                alert('Swap BNB to FROLL successful.');
+            }
+
+            await updateBalances();
+        } catch (error) {
+            console.error("Swap failed:", error);
+            alert(`Swap failed: ${error.reason || error.message}`);
+        }
+    });
 
     // Connect Wallet
     connectWalletButton.addEventListener('click', async () => {
@@ -118,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             walletAddressDisplay.textContent = walletAddress;
             await updateBalances();
+            calculateFrollPrice(); // Cập nhật giá FROLL/USD khi kết nối ví
             showSwapInterface();
         } catch (error) {
             console.error('Failed to initialize wallet:', error);
@@ -133,6 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
         frollTokenContract = null;
 
         walletAddressDisplay.textContent = '';
+        clearInputs();
         showConnectInterface();
 
         alert('Wallet disconnected successfully.');
