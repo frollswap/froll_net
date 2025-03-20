@@ -211,3 +211,19 @@ p {
         width: 100%;
     }
 }
+
+/* Chặn bôi đen và copy nội dung trang */
+body, html {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+}
+
+/* Cho phép copy địa chỉ hợp đồng */
+#froll-contract {
+    user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    -moz-user-select: text;
+}
