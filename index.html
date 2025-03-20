@@ -21,12 +21,25 @@
             <strong>1 FROLL = <span id="froll-to-usd">Loading...</span> USD</strong>
         </div>
     </header>
+    
     <!-- Connect Wallet Interface -->
     <div id="connect-interface" class="interface">
         <h1>Welcome to FrollSwap!</h1>
         <p>Swap your FROLL and BNB tokens easily, quickly, and securely.</p>
+        
+        <!-- Thêm thông tin về FROLL -->
+        <div class="token-info">
+            <p><strong>FROLL Token:</strong> 1,000,000 Max Supply</p>
+            <p><strong>Contract Address:</strong> 
+                <span id="froll-contract">0x7783cBC17d43F936DA1C1D052E4a33a9FfF774c1</span> 
+                <button onclick="copyAddress()" class="copy-button">📋 Copy</button>
+            </p>
+            <p><a href="https://bscscan.com/token/0x7783cBC17d43F936DA1C1D052E4a33a9FfF774c1" target="_blank">🔍 View on BscScan</a></p>
+        </div>
+        
         <button id="connect-wallet" class="button">Connect Wallet</button>
     </div>
+    
     <!-- Swap Interface -->
     <div id="swap-interface" class="interface" style="display: none;">
         <header class="swap-header">
@@ -65,6 +78,17 @@
         <!-- Swap Button -->
         <button id="swap-now" class="button">Swap Now</button>
     </div>
+
+    <!-- JavaScript để copy địa chỉ token -->
+    <script>
+        function copyAddress() {
+            const address = document.getElementById("froll-contract").textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                alert("FROLL contract address copied!");
+            });
+        }
+    </script>
+    
     <!-- Include Ethers.js -->
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <!-- Include App.js -->
