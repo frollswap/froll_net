@@ -254,3 +254,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Interface
     showConnectInterface();
 });
+// Chặn chuột phải và F12 (DevTools)
+document.addEventListener("contextmenu", function (event) {
+    event.preventDefault();
+});
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I")) {
+        event.preventDefault();
+    }
+});
+
+// Chặn Ctrl+U (Xem nguồn trang)
+document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey && event.key === "u") {
+        event.preventDefault();
+    }
+});
+
+// Cho phép sao chép duy nhất địa chỉ hợp đồng FROLL
+document.getElementById("froll-contract").addEventListener("copy", function (event) {
+    event.preventDefault(); // Chặn sao chép thông thường
+    const contractAddress = "0x7783cBC17d43F936DA1C1D052E4a33a9FfF774c1";
+    navigator.clipboard.writeText(contractAddress).then(() => {
+        alert("FROLL contract address copied successfully!");
+    });
+});
