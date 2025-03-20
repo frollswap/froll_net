@@ -42,6 +42,7 @@ body {
     font-weight: bold;
     text-align: right;
 }
+
 /* Interface Containers */
 .interface {
     max-width: 500px;
@@ -71,6 +72,46 @@ p {
     font-size: 14px;
     margin-bottom: 20px;
     line-height: 1.6;
+}
+
+/* Token Information */
+.token-info {
+    background: #f1f8f5;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.token-info p {
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.token-info a {
+    color: #28a745;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.token-info a:hover {
+    text-decoration: underline;
+}
+
+.copy-button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.copy-button:hover {
+    background: #218838;
 }
 
 /* Buttons */
@@ -105,6 +146,7 @@ p {
     cursor: not-allowed;
     box-shadow: none;
 }
+
 /* Swap Container */
 .swap-container {
     display: flex;
@@ -112,7 +154,7 @@ p {
     align-items: center;
     margin: 20px 0;
     gap: 20px;
-    flex-wrap: wrap; /* Để giao diện đẹp trên màn hình nhỏ */
+    flex-wrap: wrap;
 }
 
 .token-input {
@@ -145,12 +187,6 @@ p {
     outline: none;
 }
 
-.token-input .button {
-    padding: 6px 12px;
-    font-size: 14px;
-    margin-left: -8px;
-}
-
 /* Swap Details */
 .swap-details {
     text-align: left;
@@ -160,25 +196,11 @@ p {
     line-height: 1.4;
 }
 
-/* Swap Direction Button */
-.swap-direction {
-    font-size: 28px;
-    color: #28a745;
-    border: none;
-    background: none;
-    cursor: pointer;
-    transition: transform 0.2s ease, color 0.2s ease;
-}
-
-.swap-direction:hover {
-    transform: rotate(180deg);
-    color: #218838;
-}
 /* Responsive Design */
 @media (max-width: 768px) {
     .swap-container {
         flex-direction: column;
-        gap: 15px; /* Tăng khoảng cách giữa các thành phần trên màn hình nhỏ */
+        gap: 15px;
     }
 
     .token-input {
@@ -186,6 +208,6 @@ p {
     }
 
     .button {
-        width: 100%; /* Nút bấm rộng toàn bộ trên màn hình nhỏ */
+        width: 100%;
     }
 }
